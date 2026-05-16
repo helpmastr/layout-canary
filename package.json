@@ -1,6 +1,6 @@
 {
   "name": "layout-canary",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Zero-config runtime layout bug detector for development. Highlights horizontal overflow, off-screen elements, z-index conflicts, text clipping, broken breakpoints, safe-area issues, and ultrawide bugs.",
   "license": "MIT",
   "author": "",
@@ -28,7 +28,7 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "layout-canary": "./dist/cli.cjs"
+    "layout-canary": "./bin/layout-canary.js"
   },
   "exports": {
     ".": {
@@ -39,6 +39,7 @@
   },
   "files": [
     "dist",
+    "bin",
     "LICENSE",
     "README.md"
   ],
