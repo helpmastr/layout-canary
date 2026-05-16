@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>layout-canary test — buggy page</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f1f5f9;
+      color: #1e293b;
+    }
+
+    /* ── BUG 1: Fixed nav too close to top edge (safe-area) ── */
+    .nav {
+      position: fixed;
+      top: 0;          /* no safe-area-inset-top */
+      left: 0;
+      right: 0;
+      height: 48px;
+      background: #0f172a;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      font-weight: 700;
+      font-size: 18px;
+      z-index: 100;
+    }
+
+    .page { padding-top: 64px; }
+
+    /* ── BUG 2: Horizontal overflow — inner div wider than viewport ── */
+    .overflow-demo {
+      background: #dbeafe;
+      padding: 24px;
+      margin: 24px;
+      overflow: visible;
+    }
+    .overflow-demo .inner {
+      width: 1600px;   /* way wider than viewport */
+      background: #3b82f6;
+      color: #fff;
+      padding: 16px;
+      border-radius: 8px;
+      white-space: nowrap;
+    }
+
+    /* ── BUG 3: Text clipping — fixed height + overflow:hidden ── */
+    .clipped-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 24px;
+      height: 80px;       /* too short */
+      overflow: hidden;   /* clips the text */
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+
+    /* ── BUG 4: Element wider than its parent (responsive breakpoint) ── */
+    .container {
+      max-width: 600px;
+      margin: 24px auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+      position: relative;
+    }
+    .container .too-wide {
+      width: 900px;     /* wider than .container */
+      background: #fee2e2;
+      padding: 16px;
+      border-radius: 8px;
+      border: 2px dashed #ef4444;
+    }
+
+    /* ── BUG 5: Off-screen element ── */
+    .offscreen {
+      position: absolute;
+      left: -300px;    /* 300px off the left edge */
+      top: 400px;
+      width: 200px;
+      height: 60px;
+      background: #a855f7;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* ── BUG 6: Z-index conflict — buried behind sibling ── */
+    .zindex-wrapper {
+      margin: 24px;
+      position: relative;
+      height: 120px;
+    }
+    .zindex-front {
+      position: absolute;
+      top: 0; left: 0;
+      width: 300px; height: 100px;
+      background: #fef3c7;
+      border-radius: 8px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+    }
+    .zindex-buried {
+      position: absolute;
+      top: 20px; left: 40px;
+      width: 300px; height: 100px;
+      background: #fca5a5;
+      border-radius: 8px;
+      z-index: -1;   /* buried behind */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      color: #7f1d1d;
+    }
+
+    /* ── BUG 7: Ultrawide text — no max-width on paragraph ── */
+    .ultrawide-text {
+      margin: 24px;
+      padding: 24px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+    .ultrawide-text p {
+      /* No max-width — will be extremely wide on large screens */
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── BUG 8: Fixed footer too close to bottom (safe-area) ── */
+    .footer-bar {
+      position: fixed;
+      bottom: 0;       /* no safe-area-inset-bottom */
+      left: 0;
+      right: 0;
+      height: 52px;
+      background: #0f172a;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+    }
+
+    /* Labels */
+    .bug-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #ef4444;
+      margin: 24px 24px 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fixed nav (safe-area bug) -->
+  <nav class="nav">🐦 layout-canary · Bug Testbed</nav>
+
+  <!-- Off-screen ghost -->
+  <div class="offscreen">I'm off-screen 👻</div>
+
+  <div class="page">
+
+    <p class="bug-label">Bug 1 — Horizontal overflow</p>
+    <div class="overflow-demo">
+      <div class="inner">
+        This div is 1600px wide — it will blow past the viewport on any normal screen and cause horizontal scroll. Lorem ipsum dolor sit amet.
+      </div>
+    </div>
+
+    <p class="bug-label">Bug 2 — Text clipping</p>
+    <div class="clipped-card">
+      <h3>Short card, lots of text</h3>
+      <p>This card has a fixed height of 80px with overflow:hidden. All this text below the fold is silently cut off — the user never sees it. This is a common bug in CMS-driven sites where content length is variable. More text here to make sure it clips.</p>
+    </div>
+
+    <p class="bug-label">Bug 3 — Broken breakpoint (element wider than container)</p>
+    <div class="container">
+      <h3 style="margin-bottom:12px">Max-width 600px container</h3>
+      <div class="too-wide">
+        I am 900px wide inside a 600px container. I break the layout.
+      </div>
+    </div>
+
+    <p class="bug-label">Bug 4 — Z-index conflict</p>
+    <div class="zindex-wrapper">
+      <div class="zindex-front">z-index: 10 (front)</div>
+      <div class="zindex-buried">z-index: -1 — buried!</div>
+    </div>
+
+    <p class="bug-label">Bug 5 — Ultrawide text (no max-width)</p>
+    <div class="ultrawide-text">
+      <p>
+        This paragraph has no max-width set. On a normal laptop it looks fine, but on an ultrawide monitor or projector it stretches to full container width — making each line of text hundreds of characters long, which is extremely hard to read. Typographers recommend keeping line length between 60 and 80 characters for comfortable reading. This text will be flagged by the ultrawide detector on viewports wider than 1800px. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Fixed footer (safe-area bug) -->
+  <div class="footer-bar">© 2026 Buggy Corp — footer overlaps home indicator on iPhone</div>
+
+  <!-- Import layout-canary from local dist -->
+  <script type="module" src="../dist/index.js"></script>
+
+</body>
+</html>

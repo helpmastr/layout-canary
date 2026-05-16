@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.2.0] - 2026-05-16
+
+### Added
+- CLI mode: `npx layout-canary <url>` — headless Puppeteer scan, outputs issues to terminal
+- `--json` flag for machine-readable JSON output (ideal for CI and coding agents)
+- `--all-breakpoints` flag to scan all 7 standard breakpoints in one run
+- `--viewport WxH` flag to set a custom viewport
+- `--threshold <px>` flag to override the ultrawide detection threshold
+- Colored terminal output grouped by severity (errors / warnings / info)
+- CSS selector for each issue so you know exactly which element is broken
+- Exit code 1 when errors are found (CI-friendly)
+- `bin` field in package.json — `layout-canary` available as a CLI command after install
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
