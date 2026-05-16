@@ -1,0 +1,9 @@
+src/
+.github/
+*.config.ts
+tsconfig.json
+CONTRIBUTING.md
+CHANGELOG.md
+.gitignore
+node_modules/
+coverage/

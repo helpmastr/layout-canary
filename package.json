@@ -1,0 +1,52 @@
+{
+  "name": "layout-canary",
+  "version": "0.1.0",
+  "description": "Zero-config runtime layout bug detector for development. Highlights horizontal overflow, off-screen elements, z-index conflicts, text clipping, broken breakpoints, safe-area issues, and ultrawide bugs.",
+  "license": "MIT",
+  "author": "",
+  "keywords": [
+    "layout",
+    "debug",
+    "developer-tools",
+    "css",
+    "overflow",
+    "responsive",
+    "devtools",
+    "runtime",
+    "inspector"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/layout-canary.git"
+  },
+  "bugs": {
+    "url": "https://github.com/YOUR_USERNAME/layout-canary/issues"
+  },
+  "homepage": "https://github.com/YOUR_USERNAME/layout-canary#readme",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.0"
+  }
+}
