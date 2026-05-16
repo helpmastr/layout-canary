@@ -4,7 +4,7 @@ Thank you for your interest in contributing! This guide covers how to report bug
 
 ## Reporting bugs
 
-Please use [GitHub Issues](https://github.com/YOUR_USERNAME/layout-canary/issues/new/choose) and select the **Bug Report** template. Include:
+Please use [GitHub Issues](https://github.com/helpmastr/layout-canary/issues/new/choose) and select the **Bug Report** template. Include:
 
 - A minimal reproduction (CodeSandbox, StackBlitz, or a short HTML snippet)
 - Your browser and OS
@@ -13,7 +13,7 @@ Please use [GitHub Issues](https://github.com/YOUR_USERNAME/layout-canary/issues
 
 ## Requesting features
 
-Open a [Feature Request](https://github.com/YOUR_USERNAME/layout-canary/issues/new/choose) issue. Describe the layout bug category you'd like detected and why existing detectors don't cover it.
+Open a [Feature Request](https://github.com/helpmastr/layout-canary/issues/new/choose) issue. Describe the layout bug category you'd like detected and why existing detectors don't cover it.
 
 ## Submitting pull requests
 

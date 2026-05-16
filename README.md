@@ -150,7 +150,7 @@ layout-canary checks `process.env.NODE_ENV` and `import.meta.env.PROD` at startu
 
 Bug reports and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
-Found a bug? [Open an issue](https://github.com/YOUR_USERNAME/layout-canary/issues).
+Found a bug? [Open an issue](https://github.com/helpmastr/layout-canary/issues).
 
 ---
 

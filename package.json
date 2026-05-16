@@ -17,12 +17,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/YOUR_USERNAME/layout-canary.git"
+    "url": "https://github.com/helpmastr/layout-canary.git"
   },
   "bugs": {
-    "url": "https://github.com/YOUR_USERNAME/layout-canary/issues"
+    "url": "https://github.com/helpmastr/layout-canary/issues"
   },
-  "homepage": "https://github.com/YOUR_USERNAME/layout-canary#readme",
+  "homepage": "https://github.com/helpmastr/layout-canary#readme",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
